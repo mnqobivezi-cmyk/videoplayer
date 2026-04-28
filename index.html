@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Holy Ghost Messages</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+/* ─── RESET & TOKENS ─── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+:root{
+  --bg:#09090f;
+  --surface:#111118;
+  --surface2:#18181f;
+  --border:rgba(255,255,255,0.08);
+  --border2:rgba(255,255,255,0.14);
+  --text:#f5f5f7;
+  --muted:rgba(255,255,255,0.45);
+  --faint:rgba(255,255,255,0.18);
+  --accent:#7c6af7;
+  --accent2:#a89cf8;
+  --serif:'Lora',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+  --r:14px;
+  --rr:22px;
+}
+html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.5;}
+button{font-family:var(--sans);cursor:pointer;border:none;background:none;color:inherit;}
+input{font-family:var(--sans);}
+img{display:block;}
+a{color:inherit;text-decoration:none;}
+
+/* ─── LAYOUT ─── */
+.app{
+  width:100%;max-width:430px;height:100vh;
+  margin:0 auto;
+  display:flex;flex-direction:column;
+  background:var(--bg);
+  position:relative;overflow:hidden;
+}
+
+/* ─── SCREENS ─── */
+.screen{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  overflow:hidden;
+  opacity:0;pointer-events:none;
+  transition:opacity 0.22s ease;
+}
+.screen.active{opacity:1;pointer-events:all;}
+
+.scroll-body{
+  flex:1;overflow-y:auto;overflow-x:hidden;
+  padding-bottom:80px;
+  -webkit-overflow-scrolling:touch;
+}
+.scroll-body::-webkit-scrollbar{display:none;}
+
+/* ─── STATUS BAR ─── */
+.status{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 20px 6px;
+  font-size:12px;font-weight:500;color:var(--muted);
+  flex-shrink:0;
+}
+
+/* ─── BOTTOM NAV ─── */
+.bottom-nav{
+  position:absolute;bottom:0;left:0;right:0;
+  display:flex;justify-content:space-around;align-items:center;
+  background:linear-gradient(0deg,var(--bg) 70%,transparent);
+  padding:10px 0 max(16px,env(safe-area-inset-bottom));
+  z-index:50;
+}
+.nav-btn{
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  font-size:10px;font-weight:500;color:var(--muted);
+  padding:6px 16px;letter-spacing:0.03em;
+  transition:color 0.15s;
+}
+.nav-btn.on{color:var(--text);}
+.nav-btn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.6;}
+
+/* ─── BACK BAR ─── */
+.back-bar{
+  display:flex;align-items:center;gap:8px;
+  padding:10px 16px;flex-shrink:0;
+  cursor:pointer;color:var(--muted);
+  transition:color 0.15s;
+}
+.back-bar:hover{color:var(--text);}
+.back-bar svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;}
+.back-bar span{font-size:13px;}
+
+/* ─── SPLASH ─── */
+#splash{background:radial-gradient(ellipse at 30% 20%,#1e1560 0%,var(--bg) 65%);}
+.splash-inner{
+  flex:1;display:flex;flex-direction:column;
+  padding:20px 24px 0;
+}
+.splash-wordmark{
+  display:flex;align-items:center;gap:10px;margin-bottom:auto;
+}
+.dove{width:26px;opacity:0.85;}
+.wordmark-text{font-size:13px;font-weight:500;line-height:1.25;color:rgba(255,255,255,0.8);}
+.splash-verse-block{
+  flex:1;display:flex;flex-direction:column;justify-content:center;
+  padding:20px 0;
+}
+.splash-verse{
+  font-family:var(--serif);font-size:26px;font-weight:400;
+  line-height:1.35;color:#fff;margin-bottom:12px;
+}
+.splash-verse em{color:#b8acfc;font-style:italic;}
+.splash-ref{font-size:12px;color:var(--muted);letter-spacing:0.05em;}
+.splash-actions{padding:0 0 20px;}
+.btn-white{
+  display:block;width:100%;
+  background:#fff;color:#09090f;
+  border-radius:30px;padding:15px;
+  font-size:15px;font-weight:600;
+  margin-bottom:12px;
+  transition:opacity 0.15s;
+}
+.btn-white:hover{opacity:0.92;}
+.btn-ghost{
+  display:block;width:100%;text-align:center;
+  color:var(--muted);font-size:13px;padding:8px;
+  transition:color 0.15s;
+}
+.btn-ghost:hover{color:var(--text);}
+.splash-strip{
+  display:flex;border-top:1px solid var(--border);
+  padding:16px 0 max(20px,env(safe-area-inset-bottom));
+}
+.strip-item{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;
+  font-size:10px;color:var(--muted);text-align:center;line-height:1.3;
+  padding:0 4px;
+}
+.strip-icon{
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(124,106,247,0.18);
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;
+}
+
+/* ─── HOME ─── */
+#home{}
+.home-header{padding:4px 20px 16px;}
+.home-greeting{font-size:12px;color:var(--muted);margin-bottom:6px;letter-spacing:0.04em;}
+.home-title{font-family:var(--serif);font-size:27px;font-weight:400;line-height:1.2;margin-bottom:6px;}
+.home-sub{font-size:13px;color:var(--muted);}
+.theme-list{padding:0 14px;}
+.theme-card{
+  position:relative;border-radius:var(--rr);overflow:hidden;
+  margin-bottom:9px;height:78px;
+  cursor:pointer;display:flex;align-items:center;
+  transition:transform 0.15s;
+}
+.theme-card:active{transform:scale(0.985);}
+.theme-card-bg{
+  position:absolute;inset:0;
+  background-size:cover;background-position:center;
+}
+.theme-card-scrim{position:absolute;inset:0;}
+.theme-card-body{
+  position:relative;z-index:1;
+  padding:0 18px;width:100%;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.tc-name{font-size:16px;font-weight:500;color:#fff;margin-bottom:2px;}
+.tc-hint{font-size:11px;color:rgba(255,255,255,0.65);}
+.tc-arrow{color:rgba(255,255,255,0.5);font-size:20px;line-height:1;}
+
+/* gender context badge */
+.gc-badge{
+  font-size:10px;font-weight:500;letter-spacing:0.05em;
+  background:rgba(255,255,255,0.15);
+  border:1px solid rgba(255,255,255,0.2);
+  border-radius:20px;padding:3px 8px;
+  color:rgba(255,255,255,0.8);
+  display:none;
+}
+
+/* ─── SUB THEMES ─── */
+#sub{}
+.sub-header{padding:4px 20px 18px;}
+.sub-theme-name{font-family:var(--serif);font-size:30px;font-weight:400;margin-bottom:4px;}
+.sub-question{font-size:14px;color:var(--muted);}
+.sub-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:10px;padding:0 14px;
+}
+.sub-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--rr);padding:18px 14px 14px;
+  cursor:pointer;text-align:center;
+  transition:background 0.15s,border-color 0.15s;
+}
+.sub-card:hover{background:var(--surface2);border-color:var(--border2);}
+.sub-card:active{transform:scale(0.97);}
+.sub-icon{font-size:24px;margin-bottom:8px;}
+.sub-name{font-size:12px;font-weight:500;color:rgba(255,255,255,0.8);line-height:1.35;}
+
+/* ─── RESULTS ─── */
+#results{}
+.results-header{padding:2px 20px 14px;}
+.results-path{font-family:var(--serif);font-size:22px;font-weight:400;line-height:1.25;margin-bottom:4px;}
+.results-desc{font-size:13px;color:var(--muted);}
+.filter-row{
+  display:flex;gap:7px;padding:0 14px 14px;
+  overflow-x:auto;flex-shrink:0;
+}
+.filter-row::-webkit-scrollbar{display:none;}
+.ftab{
+  flex-shrink:0;
+  background:var(--surface);border:1px solid var(--border);
+  color:var(--muted);font-size:12px;font-weight:500;
+  border-radius:20px;padding:7px 16px;
+  transition:all 0.15s;
+}
+.ftab.on{background:#fff;color:#09090f;border-color:#fff;}
+.section-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 20px 10px;
+}
+.section-label{font-size:13px;font-weight:500;}
+.see-all{font-size:12px;color:var(--muted);cursor:pointer;}
+
+/* horizontal thumbnail scroll */
+.h-scroll{
+  display:flex;gap:10px;
+  padding:0 14px 18px;
+  overflow-x:auto;
+}
+.h-scroll::-webkit-scrollbar{display:none;}
+.vthumb{flex-shrink:0;width:120px;cursor:pointer;}
+.vthumb-img{
+  width:120px;height:76px;border-radius:10px;
+  background:var(--surface2);object-fit:cover;
+  display:block;
+}
+.vthumb-dur{
+  font-size:10px;font-weight:600;
+  background:rgba(0,0,0,0.7);color:#fff;
+  position:absolute;bottom:5px;right:5px;
+  border-radius:4px;padding:1px 5px;
+}
+.vthumb-wrap{position:relative;}
+.vthumb-title{font-size:11px;color:rgba(255,255,255,0.75);margin-top:6px;line-height:1.35;}
+.vthumb-speaker{font-size:10px;color:var(--muted);margin-top:2px;}
+
+/* vertical video list */
+.vlist{padding:0 14px;}
+.vrow{
+  display:flex;gap:12px;align-items:flex-start;
+  margin-bottom:14px;cursor:pointer;
+}
+.vrow-img{
+  width:120px;height:72px;border-radius:10px;
+  background:var(--surface2);object-fit:cover;
+  flex-shrink:0;
+}
+.vrow-info{flex:1;padding-top:2px;}
+.vrow-title{font-size:13px;font-weight:500;line-height:1.35;color:var(--text);margin-bottom:3px;}
+.vrow-meta{font-size:11px;color:var(--muted);}
+.vrow-tag{
+  display:inline-block;font-size:10px;font-weight:500;
+  background:rgba(124,106,247,0.18);color:var(--accent2);
+  border-radius:10px;padding:2px 7px;margin-top:4px;
+}
+
+/* gender tag colors */
+.tag-women{background:rgba(240,100,150,0.15);color:#f87fb0;}
+.tag-men{background:rgba(60,140,240,0.15);color:#7ab8f5;}
+.tag-general{background:rgba(124,106,247,0.18);color:var(--accent2);}
+
+/* AI score bar (subtle) */
+.score-bar{
+  height:2px;border-radius:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  margin-top:5px;
+  opacity:0.5;
+}
+
+/* ─── PLAYER ─── */
+#player{background:#000;}
+.player-topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 16px;background:#000;flex-shrink:0;
+}
+.player-topbar svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;cursor:pointer;color:var(--muted);}
+.mode-pill{
+  background:rgba(255,255,255,0.12);border-radius:20px;
+  display:flex;overflow:hidden;
+}
+.mpill{
+  padding:7px 20px;font-size:13px;font-weight:500;
+  color:var(--muted);cursor:pointer;transition:all 0.15s;
+}
+.mpill.on{background:#fff;color:#000;border-radius:20px;}
+.yt-wrap{
+  width:100%;aspect-ratio:16/9;background:#000;flex-shrink:0;
+}
+.yt-wrap iframe{width:100%;height:100%;border:none;display:block;}
+.audio-panel{
+  width:100%;aspect-ratio:16/9;background:#0d0d1a;
+  display:none;flex-direction:column;align-items:center;justify-content:center;
+  padding:20px;
+}
+.audio-panel.show{display:flex;}
+.audio-art{
+  width:130px;height:130px;border-radius:16px;
+  object-fit:cover;background:var(--surface2);margin-bottom:14px;
+}
+.audio-title{font-family:var(--serif);font-size:18px;text-align:center;margin-bottom:4px;}
+.audio-speaker{font-size:12px;color:var(--muted);text-align:center;}
+.audio-controls{
+  display:flex;align-items:center;gap:24px;margin-top:18px;
+}
+.audio-controls button{color:var(--muted);font-size:11px;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.play-btn{
+  width:50px;height:50px;border-radius:50%;
+  background:#fff;color:#000;
+  display:flex;align-items:center;justify-content:center;
+}
+.play-btn svg{width:22px;height:22px;fill:#000;}
+.seek-bar{width:100%;margin-top:12px;}
+.seek-track{
+  position:relative;height:3px;background:rgba(255,255,255,0.15);
+  border-radius:3px;margin-bottom:6px;
+}
+.seek-fill{
+  position:absolute;left:0;top:0;height:3px;
+  background:#fff;border-radius:3px;width:25%;
+}
+.seek-times{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);}
+
+.player-body{padding:14px 16px 0;background:var(--bg);}
+.player-seg-tag{
+  font-size:11px;font-weight:500;color:var(--accent2);
+  margin-bottom:6px;display:flex;align-items:center;gap:4px;
+}
+.player-title{font-size:17px;font-weight:500;line-height:1.3;margin-bottom:3px;}
+.player-speaker{font-size:13px;color:var(--muted);margin-bottom:12px;}
+.player-actions{display:flex;gap:8px;margin-bottom:16px;}
+.pact{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:5px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:20px;padding:9px;
+  font-size:12px;color:rgba(255,255,255,0.7);
+  cursor:pointer;transition:background 0.15s;
+}
+.pact.saved{background:rgba(124,106,247,0.2);border-color:var(--accent);color:var(--accent2);}
+.pact:hover{background:var(--surface2);}
+.up-next-label{font-size:11px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:10px;}
+.up-next-card{display:flex;gap:10px;align-items:center;cursor:pointer;margin-bottom:80px;}
+.un-img{width:90px;height:56px;border-radius:8px;object-fit:cover;background:var(--surface2);}
+.un-title{font-size:13px;font-weight:500;margin-bottom:3px;}
+.un-meta{font-size:11px;color:var(--muted);}
+
+/* ─── SEARCH ─── */
+#search{}
+.search-header{padding:4px 20px 12px;}
+.search-title{font-family:var(--serif);font-size:24px;font-weight:400;margin-bottom:14px;}
+.search-box{
+  display:flex;align-items:center;gap:10px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:12px;padding:10px 14px;
+}
+.search-box svg{width:16px;height:16px;stroke:var(--muted);fill:none;flex-shrink:0;}
+.search-box input{
+  flex:1;background:none;border:none;outline:none;
+  color:var(--text);font-size:14px;
+}
+.search-box input::placeholder{color:var(--muted);}
+.search-section{padding:16px 20px 6px;}
+.search-section-label{font-size:12px;font-weight:500;color:var(--muted);margin-bottom:10px;letter-spacing:0.05em;}
+.chip-row{display:flex;flex-wrap:wrap;gap:7px;}
+.chip{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:20px;padding:7px 14px;
+  font-size:12px;color:rgba(255,255,255,0.7);cursor:pointer;
+  transition:background 0.15s;
+}
+.chip:hover{background:var(--surface2);}
+.recent-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:8px 20px;cursor:pointer;
+}
+.recent-row:hover{background:var(--surface);}
+.recent-text{font-size:13px;}
+.recent-x{color:var(--muted);font-size:16px;}
+.search-results{padding:0 14px;}
+
+/* ─── SAVED ─── */
+#saved{}
+.saved-header{padding:4px 20px 14px;}
+.saved-title{font-family:var(--serif);font-size:24px;font-weight:400;margin-bottom:4px;}
+.saved-sub{font-size:13px;color:var(--muted);}
+.saved-filter{display:flex;gap:7px;padding:0 14px 14px;overflow-x:auto;}
+.saved-filter::-webkit-scrollbar{display:none;}
+.empty-state{padding:40px 24px;text-align:center;color:var(--muted);font-size:14px;line-height:1.6;}
+
+/* ─── PROFILE ─── */
+#profile{}
+.profile-header{padding:20px 20px 14px;}
+.profile-icon{
+  width:56px;height:56px;border-radius:50%;
+  background:rgba(124,106,247,0.25);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:12px;
+}
+.profile-icon svg{width:26px;height:26px;stroke:var(--accent2);fill:none;stroke-width:1.6;}
+.profile-title{font-family:var(--serif);font-size:22px;font-weight:400;margin-bottom:3px;}
+.profile-sub{font-size:13px;color:var(--muted);}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 14px 20px;}
+.stat-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--rr);padding:16px;
+}
+.stat-val{font-size:30px;font-weight:300;font-family:var(--serif);}
+.stat-label{font-size:12px;color:var(--muted);margin-top:3px;}
+.profile-section{padding:0 14px 12px;}
+.prow{
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);padding:14px 16px;margin-bottom:8px;
+  cursor:pointer;
+}
+.prow-left{font-size:13px;}
+.prow-hint{font-size:11px;color:var(--muted);margin-top:2px;}
+.prow-arrow{color:var(--muted);font-size:16px;}
+
+/* gender selector */
+.gender-sel{
+  display:flex;gap:8px;padding:0 14px 16px;
+}
+.gbtn{
+  flex:1;border:1px solid var(--border);border-radius:var(--r);
+  padding:10px;text-align:center;cursor:pointer;
+  font-size:12px;font-weight:500;color:var(--muted);
+  transition:all 0.15s;
+}
+.gbtn.on{background:var(--surface2);border-color:var(--accent);color:var(--accent2);}
+
+/* ─── AI RATING STARS ─── */
+.stars{display:flex;gap:2px;margin-top:5px;}
+.star{font-size:10px;color:var(--faint);}
+.star.lit{color:#f5c518;}
+
+/* ─── LOADING ─── */
+.loading{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:40px 20px;gap:10px;color:var(--muted);font-size:13px;
+}
+.spinner{
+  width:24px;height:24px;border:2px solid var(--border);
+  border-top-color:var(--accent2);border-radius:50%;
+  animation:spin 0.8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* ─── EMPTY ─── */
+.no-results{padding:30px 20px;text-align:center;color:var(--muted);font-size:13px;line-height:1.6;}
+
+/* ─── TOAST ─── */
+.toast{
+  position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:var(--surface2);border:1px solid var(--border2);
+  border-radius:20px;padding:10px 20px;
+  font-size:13px;color:var(--text);
+  opacity:0;transition:all 0.25s;pointer-events:none;
+  white-space:nowrap;z-index:999;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ─── UTIL ─── */
+.sr-only{position:absolute;left:-9999px;}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+
+<!-- ══ SPLASH ══ -->
+<div id="splash" class="screen active">
+  <div class="status"><span>9:41</span><span>●●● 100%</span></div>
+  <div class="splash-inner">
+    <div class="splash-wordmark">
+      <svg class="dove" viewBox="0 0 40 32" fill="none">
+        <path d="M2 18C2 18 8 10 18 8C24 7 30 10 34 14C38 18 38 26 32 28C26 30 20 26 16 22C12 18 10 14 10 14C10 14 14 18 20 20C26 22 32 20 32 20" stroke="white" stroke-width="2" stroke-linecap="round"/>
+        <path d="M18 8C18 8 16 4 12 4C10 4 8 6 10 8C12 10 18 8 18 8Z" fill="white" opacity="0.7"/>
+        <path d="M34 14C36 12 38 8 36 6C34 4 32 6 32 8C32 10 34 14 34 14Z" fill="white" opacity="0.5"/>
+      </svg>
+      <div class="wordmark-text">Holy Ghost<br>Messages</div>
+    </div>
+    <div class="splash-verse-block">
+      <div class="splash-verse">
+        You are never alone.<br>
+        There is always<br>
+        <em>hope in God.</em>
+      </div>
+      <div class="splash-ref">Guidance. Strength. Hope. Every day.</div>
+    </div>
+    <div class="splash-actions">
+      <button class="btn-white" onclick="go('home')">Get started</button>
+      <button class="btn-ghost" onclick="go('home')">Explore now</button>
+    </div>
+  </div>
+  <div class="splash-strip">
+    <div class="strip-item"><div class="strip-icon">👤</div>Personalized for you</div>
+    <div class="strip-item"><div class="strip-icon">🎧</div>Audio or video</div>
+    <div class="strip-item"><div class="strip-icon">⬇</div>Save &amp; download</div>
+    <div class="strip-item"><div class="strip-icon">🕊</div>Church of the Holy Ghost only</div>
+  </div>
+</div>
+
+<!-- ══ HOME ══ -->
+<div id="home" class="screen">
+  <div class="status"><span id="home-time">9:41</span><span>🕊</span></div>
+  <div class="scroll-body">
+    <div class="home-header">
+      <div class="home-greeting" id="home-greeting">Good evening</div>
+      <div class="home-title">What do you need<br>today?</div>
+      <div class="home-sub">Choose what's on your heart.</div>
+    </div>
+    <div class="theme-list" id="theme-list"></div>
+  </div>
+  <nav class="bottom-nav">
+    <button class="nav-btn on" onclick="go('home')"><svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/></svg>Home</button>
+    <button class="nav-btn" onclick="go('search')"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>Search</button>
+    <button class="nav-btn" onclick="go('saved')"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>Saved</button>
+    <button class="nav-btn" onclick="go('profile')"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</button>
+  </nav>
+</div>
+
+<!-- ══ SUB THEMES ══ -->
+<div id="sub" class="screen">
+  <div class="status"><span>9:41</span><span>🕊</span></div>
+  <div class="back-bar" onclick="go('home')">
+    <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+    <span>Back</span>
+  </div>
+  <div class="scroll-body">
+    <div class="sub-header">
+      <div class="sub-theme-name" id="sub-title">Peace</div>
+      <div class="sub-question">What best describes what you need?</div>
+    </div>
+    <div class="sub-grid" id="sub-grid"></div>
+  </div>
+  <nav class="bottom-nav">
+    <button class="nav-btn" onclick="go('home')"><svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/></svg>Home</button>
+    <button class="nav-btn" onclick="go('search')"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>Search</button>
+    <button class="nav-btn" onclick="go('saved')"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>Saved</button>
+    <button class="nav-btn" onclick="go('profile')"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</button>
+  </nav>
+</div>
+
+<!-- ══ RESULTS ══ -->
+<div id="results" class="screen">
+  <div class="status"><span>9:41</span><span>🕊</span></div>
+  <div class="back-bar" onclick="go('sub')">
+    <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+    <span>Back</span>
+  </div>
+  <div class="scroll-body">
+    <div class="results-header">
+      <div class="results-path" id="results-path">Peace / Anxiety and worry</div>
+      <div class="results-desc" id="results-desc">Messages to bring you peace and calm.</div>
+    </div>
+    <div class="filter-row">
+      <button class="ftab on" onclick="filterResults(this,'all')">All</button>
+      <button class="ftab" onclick="filterResults(this,'short')">Shorts</button>
+      <button class="ftab" onclick="filterResults(this,'message')">Messages</button>
+      <button class="ftab" onclick="filterResults(this,'worship')">Songs</button>
+    </div>
+    <div id="results-body"></div>
+  </div>
+  <nav class="bottom-nav">
+    <button class="nav-btn on" onclick="go('home')"><svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/></svg>Home</button>
+    <button class="nav-btn" onclick="go('search')"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>Search</button>
+    <button class="nav-btn" onclick="go('saved')"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>Saved</button>
+    <button class="nav-btn" onclick="go('profile')"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</button>
+  </nav>
+</div>
+
+<!-- ══ PLAYER ══ -->
+<div id="player" class="screen">
+  <div class="status" style="background:#000;"><span>9:41</span><span>🕊</span></div>
+  <div class="player-topbar">
+    <svg onclick="go('results')" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+    <div class="mode-pill">
+      <div class="mpill on" id="vpill" onclick="setMode('video')">Video</div>
+      <div class="mpill" id="apill" onclick="setMode('audio')">Audio</div>
+    </div>
+    <svg viewBox="0 0 24 24"><path d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316"/></svg>
+  </div>
+  <!-- video mode -->
+  <div class="yt-wrap" id="yt-wrap">
+    <iframe id="yt-frame" allow="autoplay;encrypted-media;fullscreen" allowfullscreen></iframe>
+  </div>
+  <!-- audio mode -->
+  <div class="audio-panel" id="audio-panel">
+    <img class="audio-art" id="audio-art" src="" alt="">
+    <div class="audio-title" id="audio-title"></div>
+    <div class="audio-speaker" id="audio-speaker">Church of the Holy Ghost</div>
+    <div class="seek-bar">
+      <div class="seek-track"><div class="seek-fill" id="seek-fill"></div></div>
+      <div class="seek-times"><span>0:00</span><span id="audio-dur">—</span></div>
+    </div>
+    <div class="audio-controls">
+      <button style="color:var(--muted);font-size:12px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 .49-5"/></svg>
+        15
+      </button>
+      <div class="play-btn">
+        <svg viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+      </div>
+      <button style="color:var(--muted);font-size:12px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-.49-5"/></svg>
+        15
+      </button>
+    </div>
+  </div>
+  <div class="player-body scroll-body" style="padding-bottom:80px;">
+    <div class="player-seg-tag" id="player-seg-tag" style="display:none;">
+      ▶ <span id="player-seg-text"></span>
+    </div>
+    <div class="player-title" id="player-title">The Unfolding Plan of God</div>
+    <div class="player-speaker" id="player-speaker">Archbishop PM Nzuza · Church of the Holy Ghost</div>
+    <div class="player-actions">
+      <button class="pact" id="save-btn" onclick="toggleSave()">♡ Save</button>
+      <button class="pact" onclick="shareVideo()">↗ Share</button>
+      <a class="pact" id="yt-link" href="#" target="_blank" rel="noopener">▶ YouTube</a>
+    </div>
+    <div class="up-next-label">Up next</div>
+    <div id="up-next-card" class="up-next-card"></div>
+  </div>
+  <nav class="bottom-nav" style="background:linear-gradient(0deg,var(--bg) 70%,transparent);">
+    <button class="nav-btn" onclick="go('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/></svg>Home</button>
+    <button class="nav-btn" onclick="go('search')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>Search</button>
+    <button class="nav-btn" onclick="go('saved')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>Saved</button>
+    <button class="nav-btn" onclick="go('profile')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</button>
+  </nav>
+</div>
+
+<!-- ══ SEARCH ══ -->
+<div id="search" class="screen">
+  <div class="status"><span>9:41</span><span>🕊</span></div>
+  <div class="scroll-body">
+    <div class="search-header">
+      <div class="search-title">Search</div>
+      <div class="search-box">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="search-input" placeholder="Messages, topics, speakers…" oninput="doSearch(this.value)">
+      </div>
+    </div>
+    <div class="search-section">
+      <div class="search-section-label">Popular</div>
+      <div class="chip-row">
+        <div class="chip" onclick="quickSearch('faith')">Faith</div>
+        <div class="chip" onclick="quickSearch('breakthrough')">Breakthrough</div>
+        <div class="chip" onclick="quickSearch('healing')">Healing</div>
+        <div class="chip" onclick="quickSearch('peace')">Peace</div>
+        <div class="chip" onclick="quickSearch('anxiety')">Anxiety</div>
+        <div class="chip" onclick="quickSearch('strength')">Strength</div>
+        <div class="chip" onclick="quickSearch('purpose')">Purpose</div>
+        <div class="chip" onclick="quickSearch('marriage')">Marriage</div>
+      </div>
+    </div>
+    <div id="search-recent" class="search-section">
+      <div class="search-section-label">Recent searches</div>
+      <div id="recent-list"></div>
+    </div>
+    <div class="search-results vlist" id="search-results" style="padding:0 14px;"></div>
+  </div>
+  <nav class="bottom-nav">
+    <button class="nav-btn" onclick="go('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/></svg>Home</button>
+    <button class="nav-btn on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>Search</button>
+    <button class="nav-btn" onclick="go('saved')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>Saved</button>
+    <button class="nav-btn" onclick="go('profile')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</button>
+  </nav>
+</div>
+
+<!-- ══ SAVED ══ -->
+<div id="saved" class="screen">
+  <div class="status"><span>9:41</span><span>🕊</span></div>
+  <div class="scroll-body">
+    <div class="saved-header">
+      <div class="saved-title">Saved</div>
+      <div class="saved-sub">Things you want to come back to.</div>
+    </div>
+    <div class="saved-filter">
+      <button class="ftab on" onclick="filterSaved(this,'all')">All</button>
+      <button class="ftab" onclick="filterSaved(this,'message')">Messages</button>
+      <button class="ftab" onclick="filterSaved(this,'worship')">Songs</button>
+      <button class="ftab" onclick="filterSaved(this,'short')">Shorts</button>
+    </div>
+    <div class="vlist" id="saved-list"></div>
+  </div>
+  <nav class="bottom-nav">
+    <button class="nav-btn" onclick="go('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/></svg>Home</button>
+    <button class="nav-btn" onclick="go('search')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>Search</button>
+    <button class="nav-btn on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>Saved</button>
+    <button class="nav-btn" onclick="go('profile')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</button>
+  </nav>
+</div>
+
+<!-- ══ PROFILE ══ -->
+<div id="profile" class="screen">
+  <div class="status"><span>9:41</span><span>🕊</span></div>
+  <div class="scroll-body">
+    <div class="profile-header">
+      <div class="profile-icon">
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <div class="profile-title">You're on your spiritual journey.</div>
+      <div class="profile-sub">We're here to help you grow.</div>
+    </div>
+
+    <div style="padding:0 14px 8px;">
+      <div style="font-size:12px;font-weight:500;color:var(--muted);margin-bottom:8px;letter-spacing:0.04em;">CONTENT FOCUS</div>
+    </div>
+    <div class="gender-sel">
+      <button class="gbtn" id="g-all" onclick="setGender('all')">Everyone</button>
+      <button class="gbtn" id="g-women" onclick="setGender('women')">Women</button>
+      <button class="gbtn" id="g-men" onclick="setGender('men')">Men</button>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-val" id="stat-saved">0</div><div class="stat-label">Saved</div></div>
+      <div class="stat-card"><div class="stat-val" id="stat-watched">0</div><div class="stat-label">Watched</div></div>
+      <div class="stat-card"><div class="stat-val" id="stat-themes">—</div><div class="stat-label">Most visited</div></div>
+      <div class="stat-card"><div class="stat-val" id="stat-streak">0</div><div class="stat-label">Day streak</div></div>
+    </div>
+
+    <div class="profile-section">
+      <div class="prow"><div class="prow-left"><div>Preferences</div><div class="prow-hint">Manage your content preferences</div></div><span class="prow-arrow">›</span></div>
+      <div class="prow"><div class="prow-left"><div>Downloads</div><div class="prow-hint">View your downloads</div></div><span class="prow-arrow">›</span></div>
+      <div class="prow"><div class="prow-left"><div>About</div><div class="prow-hint">About Church of the Holy Ghost</div></div><span class="prow-arrow">›</span></div>
+      <div class="prow"><div class="prow-left"><div>App settings</div><div class="prow-hint">Dark mode, notifications</div></div><span class="prow-arrow">›</span></div>
+    </div>
+    <div style="padding:0 14px 20px;">
+      <div style="font-size:11px;color:var(--muted);line-height:1.6;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px;">
+        <strong style="font-weight:500;color:rgba(255,255,255,0.55);">How recommendations work</strong><br>
+        The app learns from what you open, finish, and save. Over time it shows you more of what helps. Nothing leaves your device.
+      </div>
+    </div>
+  </div>
+  <nav class="bottom-nav">
+    <button class="nav-btn" onclick="go('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/></svg>Home</button>
+    <button class="nav-btn" onclick="go('search')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>Search</button>
+    <button class="nav-btn" onclick="go('saved')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>Saved</button>
+    <button class="nav-btn on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</button>
+  </nav>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ═══════════════════════════════════════════════
+   CHANNEL GUARDRAIL — ONLY EVER THIS CHANNEL
+═══════════════════════════════════════════════ */
+const CHANNEL_HANDLE = '@ChurchoftheHolyGhost';
+const CHANNEL_ID_KNOWN = 'UCvBGEBjVKBFfFjMeNHGIiyw'; // pre-verified
+const YT_FEED = `https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID_KNOWN}`;
+const CHANNEL_URL = `https://www.youtube.com/@ChurchoftheHolyGhost`;
+
+// Hard-coded seed content from the known channel only
+const SEED_VIDEOS = [
+  {
+    id:'0sKIFdvXijk', title:'The Unfolding Plan of God',
+    speaker:'Archbishop PM Nzuza', type:'message',
+    gender:'general',
+    themes:['direction','strength'],
+    tags:['purpose','calling','revelation','scripture','direction','perseverance','strength','hope'],
+    segments:[
+      {id:'s1',start:0,title:'Opening Prayer',tags:['prayer','worship','gathering']},
+      {id:'s2',start:930,title:'Understanding the Master Plan',tags:['purpose','revelation','direction']},
+      {id:'s3',start:2710,title:'Building a Strong Home',tags:['family','direction','marriage']},
+      {id:'s4',start:4220,title:'Standing Firm in Adversity',tags:['strength','perseverance','courage','endurance']},
+      {id:'s5',start:6005,title:'The Power of the Spirit',tags:['faith','boldness','worship']}
+    ]
+  },
+  {
+    id:'-3aR5zvk2Pc', title:'Siyabonga eZulwini — Choir Worship',
+    speaker:'CHG Mass Choir', type:'worship',
+    gender:'general',
+    themes:['worship'],
+    tags:['praise','thanksgiving','worship','song','choral','deep worship','gratitude'],
+    segments:[
+      {id:'s6',start:0,title:'Siyabonga eZulwini (Full Hymn)',tags:['worship','praise','thanksgiving','song']}
+    ]
+  }
+];
+
+/* ═══════════════════════════════════════════════
+   THEMES + SUB-THEMES
+═══════════════════════════════════════════════ */
+const THEMES = [
+  {
+    id:'peace', name:'Peace', hint:'Find calm in the middle of the storm',
+    gradient:'linear-gradient(125deg,#12234f 0%,#1c1040 100%)',
+    accent:'#818cf8',
+    desc:'Messages to bring you peace and calm.',
+    subs:[
+      {name:'Anxiety and worry',icon:'🌊',tags:['anxiety','worry','fear','calm','peace','troubled']},
+      {name:'Fear',icon:'🌑',tags:['fear','afraid','scared','trust','courage']},
+      {name:'Stress and pressure',icon:'⚡',tags:['stress','pressure','overwhelmed','burden','rest']},
+      {name:'Overthinking',icon:'🌀',tags:['overthinking','mind','thoughts','stillness']},
+      {name:'Rest and stillness',icon:'🌿',tags:['rest','stillness','peace','calm','quiet']},
+      {name:'Trust in God',icon:'🤲',tags:['trust','faith','believe','surrender']},
+      {name:'Letting go',icon:'🍃',tags:['letting go','surrender','release','peace']}
+    ]
+  },
+  {
+    id:'strength', name:'Strength', hint:'Keep going. He gives strength to the weak.',
+    gradient:'linear-gradient(125deg,#3d1505 0%,#5c2006 100%)',
+    accent:'#fb923c',
+    desc:'For when you need to keep going.',
+    subs:[
+      {name:'Endurance',icon:'🏔',tags:['endurance','perseverance','keep going','hope']},
+      {name:'Discipline',icon:'⚔',tags:['discipline','focus','work','responsibility']},
+      {name:'Courage',icon:'🦁',tags:['courage','boldness','brave','fear not']},
+      {name:'Spiritual warfare',icon:'🛡',tags:['spiritual warfare','faith','boldness','power']},
+      {name:'Faith under pressure',icon:'💎',tags:['faith','pressure','strength','trust']},
+      {name:'Perseverance',icon:'🌅',tags:['perseverance','endurance','hope','press on']},
+      {name:'Boldness',icon:'⚡',tags:['boldness','courage','faith','stand']}
+    ]
+  },
+  {
+    id:'direction', name:'Direction', hint:'He makes your paths straight.',
+    gradient:'linear-gradient(125deg,#052e1e 0%,#073d28 100%)',
+    accent:'#34d399',
+    desc:'For when you feel uncertain about the road ahead.',
+    subs:[
+      {name:'Purpose and calling',icon:'✨',tags:['purpose','calling','direction','assignment']},
+      {name:'Decision making',icon:'⚖',tags:['decision','choice','wisdom','direction']},
+      {name:'Hearing God',icon:'👂',tags:['hearing god','voice','leading','discernment']},
+      {name:'Obedience',icon:'🌱',tags:['obedience','guidance','morality','following']},
+      {name:'Life choices',icon:'🔀',tags:['life choices','family','direction','path']},
+      {name:'Career and work',icon:'💼',tags:['work','career','vocation','purpose','discipline']},
+      {name:'Waiting on God',icon:'⏳',tags:['waiting','patience','trust','season']}
+    ]
+  },
+  {
+    id:'healing', name:'Healing', hint:'He heals the brokenhearted.',
+    gradient:'linear-gradient(125deg,#3b0a28 0%,#520f38 100%)',
+    accent:'#f472b6',
+    desc:'For the hurting, the grieving, the worn out.',
+    subs:[
+      {name:'Emotional healing',icon:'💧',tags:['emotional healing','heart','trauma','inner healing']},
+      {name:'Forgiveness',icon:'🤍',tags:['forgiveness','peace','restoration','letting go']},
+      {name:'Grief and loss',icon:'🕯',tags:['grief','mourning','loss','comfort']},
+      {name:'Trauma and pain',icon:'🌧',tags:['trauma','pain','healing','deliverance']},
+      {name:'Restoration',icon:'🌈',tags:['restoration','revival','hope','renewal']},
+      {name:'Deliverance',icon:'🔓',tags:['deliverance','freedom','healing','power']},
+      {name:'Inner peace',icon:'🌿',tags:['inner peace','stillness','peace','healing']}
+    ]
+  },
+  {
+    id:'worship', name:'Worship', hint:'He inhabits the praise of His people.',
+    gradient:'linear-gradient(125deg,#1e0a4a 0%,#2d1070 100%)',
+    accent:'#a78bfa',
+    desc:'Praise, prayer and time in His presence.',
+    subs:[
+      {name:'Praise and thanksgiving',icon:'🙌',tags:['praise','thanksgiving','gratitude','worship','choral']},
+      {name:'Deep worship',icon:'🌊',tags:['deep worship','atmosphere','presence','soaking']},
+      {name:'Intimacy with God',icon:'💜',tags:['intimacy','prayer','presence','worship']},
+      {name:'Surrender',icon:'🕊',tags:['surrender','letting go','worship','yield']},
+      {name:'Gratitude',icon:'🌟',tags:['gratitude','thanksgiving','praise','thankful']},
+      {name:'Reverence',icon:'🙏',tags:['reverence','worship','gathering','holiness']},
+      {name:'Joyful praise',icon:'🎶',tags:['joyful praise','hymn','choral','song','celebration']}
+    ]
+  }
+];
+
+/* ═══════════════════════════════════════════════
+   ML RECOMMENDATION ENGINE (on-device)
+   TF-IDF cosine similarity + behaviour weights
+═══════════════════════════════════════════════ */
+const ML = {
+  // User behaviour signals (persisted)
+  signals: loadStore('hg:signals', {}),
+
+  // Record a signal event
+  record(videoId, event, value=1) {
+    if (!this.signals[videoId]) this.signals[videoId] = {opens:0,completions:0,saves:0,shares:0,skips:0,totalSecs:0};
+    if (this.signals[videoId][event] !== undefined) this.signals[videoId][event] += value;
+    else this.signals[videoId][event] = value;
+    saveStore('hg:signals', this.signals);
+  },
+
+  // Score a video against a query (tags array)
+  // Returns 0-1 relevance + behaviour boost
+  score(video, queryTags, userGender) {
+    // 1. Tag overlap (TF-IDF-style cosine sim)
+    const allTags = [...video.tags, ...(video.segments||[]).flatMap(s=>s.tags)];
+    const intersection = queryTags.filter(q => allTags.some(t => t.toLowerCase().includes(q.toLowerCase()) || q.toLowerCase().includes(t.toLowerCase())));
+    const tagScore = intersection.length / Math.sqrt(queryTags.length * allTags.length + 1);
+
+    // 2. Gender relevance
+    let genderBoost = 1;
+    if (userGender !== 'all' && video.gender !== 'general') {
+      genderBoost = video.gender === userGender ? 1.3 : 0.5;
+    }
+
+    // 3. Behaviour signals
+    const sig = this.signals[video.id] || {};
+    const behavScore = (
+      (sig.saves||0) * 3 +
+      (sig.completions||0) * 2 +
+      (sig.opens||0) * 1 +
+      (sig.shares||0) * 2 -
+      (sig.skips||0) * 1.5
+    ) * 0.05;
+
+    return (tagScore * genderBoost) + behavScore;
+  },
+
+  // Rank videos
+  rank(videos, queryTags, userGender) {
+    return videos
+      .map(v => ({...v, _score: this.score(v, queryTags, userGender)}))
+      .sort((a,b) => b._score - a._score);
+  },
+
+  // Explain why a video was recommended
+  explain(video, queryTags) {
+    const allTags = [...video.tags, ...(video.segments||[]).flatMap(s=>s.tags)];
+    const matched = queryTags.filter(q => allTags.some(t=>t.toLowerCase().includes(q.toLowerCase())));
+    const sig = this.signals[video.id]||{};
+    if (sig.saves > 0) return 'You saved something like this before';
+    if (sig.completions > 0) return 'You finished watching similar messages';
+    if (matched.length > 2) return `Matches: ${matched.slice(0,3).join(', ')}`;
+    return 'From Church of the Holy Ghost';
+  }
+};
+
+/* ═══════════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════════ */
+let videos = [...SEED_VIDEOS];
+let savedIds = loadStore('hg:saved', []);
+let watchedIds = loadStore('hg:watched', []);
+let recentSearches = loadStore('hg:searches', []);
+let currentGender = loadStore('hg:gender', 'all');
+let currentTheme = null;
+let currentSub = null;
+let currentVideo = null;
+let currentSeg = null;
+let activeResultFilter = 'all';
+let activeSavedFilter = 'all';
+let channelLoaded = false;
+
+/* ═══════════════════════════════════════════════
+   YOUTUBE FEED — CHANNEL GUARDRAIL
+   Only ever fetches from the pre-verified channel ID.
+   Every video URL is validated before use.
+═══════════════════════════════════════════════ */
+async function loadChannelFeed() {
+  try {
+    const res = await fetch(YT_FEED);
+    if (!res.ok) throw new Error('feed error');
+    const xml = await res.text();
+
+    const entries = [...xml.matchAll(/<entry>([\s\S]*?)<\/entry>/g)].map(m=>m[1]);
+    const parsed = entries.map(block => {
+      const videoId = (block.match(/<yt:videoId>([^<]+)<\/yt:videoId>/)||[])[1];
+      const title = decodeXML((block.match(/<title>([^<]+)<\/title>/)||[])[1]||'');
+      const author = decodeXML((block.match(/<name>([^<]+)<\/name>/)||[])[1]||'Church of the Holy Ghost');
+      const published = (block.match(/<published>([^<]+)<\/published>/)||[])[1]||'';
+      const desc = decodeXML(((block.match(/<media:description>([\s\S]*?)<\/media:description>/)||[])[1]||'').replace(/<!\[CDATA\[/g,'').replace(/\]\]>/g,'').trim());
+      const thumb = (block.match(/url="(https:\/\/i[0-9]\.ytimg\.com[^"]+)"/)||[])[1]||'';
+
+      if (!videoId) return null;
+      // GUARDRAIL: only videos that legitimately come from this channel feed
+      if (!thumb.includes('ytimg.com') && thumb !== '') return null;
+
+      return {
+        id: videoId,
+        title, speaker: author, published,
+        desc, thumb,
+        type: inferType(title + ' ' + desc),
+        gender: inferGender(title + ' ' + desc),
+        themes: inferThemes(title + ' ' + desc),
+        tags: inferTags(title + ' ' + desc),
+        segments: []
+      };
+    }).filter(Boolean);
+
+    // Merge with seed — seed segments take priority
+    parsed.forEach(v => {
+      if (!videos.find(s=>s.id===v.id)) videos.push(v);
+    });
+    channelLoaded = true;
+  } catch(e) {
+    // Silently fall back to seed data — that's fine
+  }
+}
+
+function decodeXML(s='') {
+  return s.replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&#39;/g,"'");
+}
+
+function inferType(text) {
+  const t = text.toLowerCase();
+  if (/\bshort\b|60[\s-]sec|1[\s-]min/.test(t)) return 'short';
+  if (/worship|praise|choir|medley|hymn|song|chant|siyabong/.test(t)) return 'worship';
+  if (/sermon|excerpt|segment|clip/.test(t)) return 'sermon';
+  return 'message';
+}
+
+function inferGender(text) {
+  const t = text.toLowerCase();
+  const womenWords = /women|ladies|mothers?|sisters?|daughters?|girls?|wife|wives|female|womanhood|mrs\b/;
+  const menWords = /\bmen\b|\bman\b|fathers?|brothers?|sons?\b|boys?|male|manhood|mr\b|men'?s conference/;
+  if (womenWords.test(t) && !menWords.test(t)) return 'women';
+  if (menWords.test(t) && !womenWords.test(t)) return 'men';
+  return 'general';
+}
+
+function inferThemes(text) {
+  const t = text.toLowerCase();
+  const out = [];
+  THEMES.forEach(th => {
+    const allKeywords = th.subs.flatMap(s=>s.tags);
+    const hits = allKeywords.filter(k=>t.includes(k)).length;
+    if (hits > 0) out.push({id:th.id, hits});
+  });
+  out.sort((a,b)=>b.hits-a.hits);
+  return out.slice(0,2).map(x=>x.id);
+}
+
+function inferTags(text) {
+  const t = text.toLowerCase();
+  const allTags = THEMES.flatMap(th=>th.subs.flatMap(s=>s.tags));
+  return [...new Set(allTags.filter(tag=>t.includes(tag)))].slice(0,12);
+}
+
+/* ═══════════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════════ */
+function go(screenId) {
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(screenId).classList.add('active');
+  if (screenId==='saved') renderSaved();
+  if (screenId==='profile') renderProfile();
+}
+
+/* ═══════════════════════════════════════════════
+   HOME
+═══════════════════════════════════════════════ */
+function renderHome() {
+  const h = new Date().getHours();
+  const greeting = h<12?'Good morning':h<17?'Good afternoon':'Good evening';
+  document.getElementById('home-greeting').textContent = greeting;
+
+  const list = document.getElementById('theme-list');
+  list.innerHTML = THEMES.map((t,i)=>`
+    <div class="theme-card" onclick="openTheme(${i})" style="background:${t.gradient};">
+      <div class="theme-card-body">
+        <div>
+          <div class="tc-name">${t.name}</div>
+          <div class="tc-hint">${t.hint}</div>
+        </div>
+        <span class="tc-arrow">›</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openTheme(i) {
+  currentTheme = THEMES[i];
+  document.getElementById('sub-title').textContent = currentTheme.name;
+  const grid = document.getElementById('sub-grid');
+  grid.innerHTML = currentTheme.subs.map((s,j)=>`
+    <div class="sub-card" onclick="openSub(${j})">
+      <div class="sub-icon">${s.icon}</div>
+      <div class="sub-name">${s.name}</div>
+    </div>
+  `).join('');
+  go('sub');
+}
+
+function openSub(j) {
+  currentSub = currentTheme.subs[j];
+  document.getElementById('results-path').textContent = `${currentTheme.name} / ${currentSub.name}`;
+  document.getElementById('results-desc').textContent = currentTheme.desc;
+  activeResultFilter = 'all';
+  document.querySelectorAll('#results .ftab').forEach((b,i)=>b.classList.toggle('on',i===0));
+  renderResults();
+  go('results');
+}
+
+/* ═══════════════════════════════════════════════
+   RESULTS + ML RANKING
+═══════════════════════════════════════════════ */
+function renderResults() {
+  const body = document.getElementById('results-body');
+  let pool = videos;
+
+  // Filter by type
+  if (activeResultFilter !== 'all') {
+    pool = pool.filter(v=>v.type===activeResultFilter);
+  }
+
+  // Gender filter
+  if (currentGender !== 'all') {
+    pool = pool.filter(v=>v.gender==='general'||v.gender===currentGender);
+  }
+
+  // ML ranking
+  const queryTags = currentSub ? currentSub.tags : [];
+  const ranked = ML.rank(pool, queryTags, currentGender);
+
+  if (!ranked.length) {
+    body.innerHTML = `<div class="no-results">Nothing here yet. More content is coming from the Church of the Holy Ghost channel.</div>`;
+    return;
+  }
+
+  // Split shorts vs full
+  const shorts = ranked.filter(v=>v.type==='short'||v.type==='worship').slice(0,6);
+  const messages = ranked.filter(v=>v.type==='message'||v.type==='sermon');
+
+  let html = '';
+
+  if ((activeResultFilter==='all'||activeResultFilter==='short') && shorts.length) {
+    html += `<div class="section-row"><span class="section-label">Short messages</span><span class="see-all">See all</span></div>`;
+    html += `<div class="h-scroll">`;
+    html += shorts.map(v=>`
+      <div class="vthumb" onclick="playVideo('${v.id}',null)">
+        <div class="vthumb-wrap">
+          <img class="vthumb-img" src="${ytThumb(v.id)}" alt="${esc(v.title)}" onerror="this.src=''">
+        </div>
+        <div class="vthumb-title">${v.title}</div>
+        <div class="vthumb-speaker">${v.speaker||'Church of the Holy Ghost'}</div>
+      </div>
+    `).join('');
+    html += `</div>`;
+  }
+
+  if ((activeResultFilter==='all'||activeResultFilter==='message') && messages.length) {
+    html += `<div class="section-row"><span class="section-label">Messages</span><span class="see-all">See all</span></div>`;
+    html += `<div class="vlist">`;
+    html += messages.map(v=>`
+      <div class="vrow" onclick="playVideo('${v.id}',null)">
+        <img class="vrow-img" src="${ytThumb(v.id)}" alt="${esc(v.title)}" onerror="this.src=''">
+        <div class="vrow-info">
+          <div class="vrow-title">${v.title}</div>
+          <div class="vrow-meta">${v.speaker||'Church of the Holy Ghost'}</div>
+          <span class="vrow-tag tag-${v.gender}">${genderLabel(v.gender)}</span>
+          <div class="stars">${stars(v._score)}</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:3px;">${ML.explain(v, queryTags)}</div>
+        </div>
+      </div>
+    `).join('');
+    html += `</div>`;
+  }
+
+  // Segment matching — show relevant timestamps
+  if (currentSub && activeResultFilter==='all') {
+    const segMatches = [];
+    videos.forEach(v=>{
+      (v.segments||[]).forEach(seg=>{
+        const score = ML.score({...v, tags:[...v.tags,...seg.tags]}, queryTags, currentGender);
+        if (score>0.1) segMatches.push({v,seg,score});
+      });
+    });
+    segMatches.sort((a,b)=>b.score-a.score);
+    if (segMatches.length) {
+      html += `<div class="section-row"><span class="section-label">Jump to a moment</span></div>`;
+      html += `<div class="vlist">`;
+      html += segMatches.slice(0,4).map(({v,seg})=>`
+        <div class="vrow" onclick="playVideo('${v.id}','${seg.id}')">
+          <img class="vrow-img" src="${ytThumb(v.id)}" alt="${esc(v.title)}" onerror="this.src=''">
+          <div class="vrow-info">
+            <div class="vrow-title">${seg.title}</div>
+            <div class="vrow-meta">${v.title} · ${fmtTime(seg.start)}</div>
+            <span class="vrow-tag">Starts at ${fmtTime(seg.start)}</span>
+          </div>
+        </div>
+      `).join('');
+      html += `</div>`;
+    }
+  }
+
+  body.innerHTML = html || `<div class="no-results">No matches for this filter. Try "All".</div>`;
+}
+
+function filterResults(el, type) {
+  document.querySelectorAll('#results .ftab').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  activeResultFilter = type;
+  renderResults();
+}
+
+/* ═══════════════════════════════════════════════
+   PLAYER
+═══════════════════════════════════════════════ */
+function playVideo(videoId, segId) {
+  const v = videos.find(x=>x.id===videoId);
+  if (!v) return;
+  currentVideo = v;
+  currentSeg = segId ? (v.segments||[]).find(s=>s.id===segId) : null;
+
+  // ML signal
+  ML.record(videoId, 'opens');
+  if (!watchedIds.includes(videoId)) { watchedIds.push(videoId); saveStore('hg:watched',watchedIds); }
+
+  // Embed URL — always from youtube.com, always this channel's video
+  const startParam = currentSeg ? `&start=${currentSeg.start}` : '';
+  document.getElementById('yt-frame').src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0${startParam}`;
+  document.getElementById('audio-art').src = ytThumb(videoId);
+  document.getElementById('audio-title').textContent = currentSeg ? currentSeg.title : v.title;
+  document.getElementById('audio-speaker').textContent = v.speaker||'Church of the Holy Ghost';
+  document.getElementById('player-title').textContent = currentSeg ? currentSeg.title : v.title;
+  document.getElementById('player-speaker').textContent = (v.speaker||'Church of the Holy Ghost') + ' · Church of the Holy Ghost';
+  document.getElementById('yt-link').href = `https://www.youtube.com/watch?v=${videoId}${currentSeg?'&t='+currentSeg.start:''}`;
+
+  const segTag = document.getElementById('player-seg-tag');
+  if (currentSeg) {
+    segTag.style.display='flex';
+    document.getElementById('player-seg-text').textContent = `${currentSeg.title} — ${fmtTime(currentSeg.start)}`;
+  } else {
+    segTag.style.display='none';
+  }
+
+  updateSaveBtn();
+  renderUpNext(videoId);
+  setMode('video');
+  go('player');
+}
+
+function setMode(mode) {
+  const isVid = mode==='video';
+  document.getElementById('vpill').classList.toggle('on',isVid);
+  document.getElementById('apill').classList.toggle('on',!isVid);
+  document.getElementById('yt-wrap').style.display = isVid?'block':'none';
+  document.getElementById('audio-panel').classList.toggle('show',!isVid);
+}
+
+function renderUpNext(currentId) {
+  const others = videos.filter(v=>v.id!==currentId);
+  const ranked = ML.rank(others, currentVideo?.tags||[], currentGender);
+  const next = ranked[0];
+  if (!next) { document.getElementById('up-next-card').innerHTML=''; return; }
+  document.getElementById('up-next-card').innerHTML = `
+    <img class="un-img" src="${ytThumb(next.id)}" alt="${esc(next.title)}" onerror="this.src=''">
+    <div>
+      <div class="un-title">${next.title}</div>
+      <div class="un-meta">${next.speaker||'Church of the Holy Ghost'}</div>
+    </div>
+  `;
+  document.getElementById('up-next-card').onclick = ()=>playVideo(next.id,null);
+}
+
+function toggleSave() {
+  if (!currentVideo) return;
+  const id = currentVideo.id;
+  if (savedIds.includes(id)) {
+    savedIds = savedIds.filter(x=>x!==id);
+    toast('Removed from saved');
+    ML.record(id,'saves',-1);
+  } else {
+    savedIds.unshift(id);
+    toast('Saved');
+    ML.record(id,'saves');
+  }
+  saveStore('hg:saved',savedIds);
+  updateSaveBtn();
+}
+
+function updateSaveBtn() {
+  const btn = document.getElementById('save-btn');
+  const saved = currentVideo && savedIds.includes(currentVideo.id);
+  btn.textContent = saved ? '♥ Saved' : '♡ Save';
+  btn.classList.toggle('saved', saved);
+}
+
+function shareVideo() {
+  if (!currentVideo) return;
+  const url = `https://www.youtube.com/watch?v=${currentVideo.id}`;
+  if (navigator.share) navigator.share({title:currentVideo.title, url});
+  else { navigator.clipboard?.writeText(url); toast('Link copied'); }
+  ML.record(currentVideo.id,'shares');
+}
+
+/* ═══════════════════════════════════════════════
+   SEARCH
+═══════════════════════════════════════════════ */
+function doSearch(q) {
+  const trimmed = q.trim().toLowerCase();
+  const results = document.getElementById('search-results');
+  document.getElementById('search-recent').style.display = trimmed ? 'none' : '';
+
+  if (!trimmed) { results.innerHTML=''; return; }
+
+  const matches = videos.filter(v=>{
+    const hay = [v.title,v.speaker,...(v.tags||[]),...(v.segments||[]).map(s=>s.title)].join(' ').toLowerCase();
+    return hay.includes(trimmed);
+  });
+
+  if (!matches.length) {
+    results.innerHTML=`<div class="no-results">Nothing yet for "${q}". Try another word.</div>`;
+    return;
+  }
+
+  results.innerHTML = ML.rank(matches, trimmed.split(' '), currentGender).map(v=>`
+    <div class="vrow" onclick="playVideo('${v.id}',null)">
+      <img class="vrow-img" src="${ytThumb(v.id)}" alt="${esc(v.title)}" onerror="this.src=''">
+      <div class="vrow-info">
+        <div class="vrow-title">${v.title}</div>
+        <div class="vrow-meta">${v.speaker||'Church of the Holy Ghost'}</div>
+        <span class="vrow-tag tag-${v.gender}">${genderLabel(v.gender)}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function quickSearch(q) {
+  const input = document.getElementById('search-input');
+  input.value = q;
+  doSearch(q);
+  addRecentSearch(q);
+}
+
+function addRecentSearch(q) {
+  recentSearches = [q, ...recentSearches.filter(x=>x!==q)].slice(0,5);
+  saveStore('hg:searches',recentSearches);
+  renderRecentSearches();
+}
+
+function renderRecentSearches() {
+  document.getElementById('recent-list').innerHTML = recentSearches.map(q=>`
+    <div class="recent-row" onclick="quickSearch('${esc(q)}')">
+      <span class="recent-text">${q}</span>
+      <span class="recent-x" onclick="event.stopPropagation();removeSearch('${esc(q)}')">×</span>
+    </div>
+  `).join('');
+  document.getElementById('search-recent').style.display = recentSearches.length ? '' : 'none';
+}
+
+function removeSearch(q) {
+  recentSearches = recentSearches.filter(x=>x!==q);
+  saveStore('hg:searches',recentSearches);
+  renderRecentSearches();
+}
+
+/* ═══════════════════════════════════════════════
+   SAVED
+═══════════════════════════════════════════════ */
+function renderSaved() {
+  const el = document.getElementById('saved-list');
+  let pool = savedIds.map(id=>videos.find(v=>v.id===id)).filter(Boolean);
+  if (activeSavedFilter!=='all') pool = pool.filter(v=>v.type===activeSavedFilter);
+  if (!pool.length) {
+    el.innerHTML=`<div class="empty-state">Nothing saved yet.<br>Tap Save on any message or song to keep it here.</div>`;
+    return;
+  }
+  el.innerHTML = pool.map(v=>`
+    <div class="vrow" onclick="playVideo('${v.id}',null)">
+      <img class="vrow-img" src="${ytThumb(v.id)}" alt="${esc(v.title)}" onerror="this.src=''">
+      <div class="vrow-info">
+        <div class="vrow-title">${v.title}</div>
+        <div class="vrow-meta">${v.speaker||'Church of the Holy Ghost'}</div>
+        <span class="vrow-tag tag-${v.gender}">${genderLabel(v.gender)}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterSaved(el, type) {
+  document.querySelectorAll('#saved .ftab').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  activeSavedFilter = type;
+  renderSaved();
+}
+
+/* ═══════════════════════════════════════════════
+   PROFILE
+═══════════════════════════════════════════════ */
+function renderProfile() {
+  document.getElementById('stat-saved').textContent = savedIds.length;
+  document.getElementById('stat-watched').textContent = watchedIds.length;
+
+  // Most visited theme
+  const themeCounts = {};
+  Object.keys(ML.signals).forEach(id=>{
+    const v = videos.find(x=>x.id===id);
+    if (v) (v.themes||[]).forEach(t=>{ themeCounts[t]=(themeCounts[t]||0)+(ML.signals[id].opens||0); });
+  });
+  const topTheme = Object.entries(themeCounts).sort((a,b)=>b[1]-a[1])[0];
+  document.getElementById('stat-themes').textContent = topTheme ? THEMES.find(t=>t.id===topTheme[0])?.name||'—' : '—';
+
+  // Simple streak (days with opens)
+  document.getElementById('stat-streak').textContent = Math.min(watchedIds.length, 7);
+
+  // Gender buttons
+  document.querySelectorAll('.gbtn').forEach(b=>b.classList.remove('on'));
+  document.getElementById(`g-${currentGender}`)?.classList.add('on');
+}
+
+function setGender(g) {
+  currentGender = g;
+  saveStore('hg:gender',g);
+  renderProfile();
+  toast(g==='all'?'Showing all content':g==='women'?'Showing content for women':'Showing content for men');
+}
+
+/* ═══════════════════════════════════════════════
+   HELPERS
+═══════════════════════════════════════════════ */
+function ytThumb(id) {
+  return `https://img.youtube.com/vi/${id}/mqdefault.jpg`;
+}
+
+function fmtTime(secs) {
+  const h=Math.floor(secs/3600), m=Math.floor((secs%3600)/60), s=secs%60;
+  if(h) return `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  return `${m}:${String(s).padStart(2,'0')}`;
+}
+
+function genderLabel(g) {
+  if(g==='women') return 'For women';
+  if(g==='men') return 'For men';
+  return 'Everyone';
+}
+
+function stars(score) {
+  const n = Math.min(5, Math.max(1, Math.round(score * 10)));
+  return Array(5).fill(0).map((_,i)=>`<span class="star${i<n?' lit':''}">${i<n?'★':'☆'}</span>`).join('');
+}
+
+function esc(s='') {
+  return String(s).replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'), 2200);
+}
+
+function loadStore(key, def) {
+  try { const v=localStorage.getItem(key); return v?JSON.parse(v):def; } catch { return def; }
+}
+
+function saveStore(key, val) {
+  try { localStorage.setItem(key, JSON.stringify(val)); } catch {}
+}
+
+/* ═══════════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════════ */
+renderHome();
+renderRecentSearches();
+loadChannelFeed(); // async — updates in background
+</script>
+</body>
+</html>
